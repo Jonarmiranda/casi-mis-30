@@ -101,7 +101,7 @@
 
         .preset-photo {
             width: 100%;
-            height: 200px;
+            max-height: 250px;
             object-fit: cover;
             border-radius: 10px;
             margin-top: 12px;
@@ -114,7 +114,7 @@
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .flag-btn {
@@ -134,7 +134,7 @@
             box-shadow: 0 4px 12px rgba(138, 154, 134, 0.4);
         }
 
-        /* Apartado para subir/cargar foto propia extra si lo desea */
+        /* Apartado para subir/cargar foto propia extra */
         .photo-section {
             margin-bottom: 25px;
             padding-top: 20px;
@@ -238,14 +238,14 @@
 
         <div class="btn-group">
             <button class="btn" onclick="mostrarSeccion(1)">💌 ¿No quieres darme un beso?</button>
-            <button class="btn" onclick="mostrarSeccion(2)">🌸 ¿Quién va a cumpliar 30 añitos?</button>
+            <button class="btn" onclick="mostrarSeccion(2)">🌸 ¿Quién va a cumplir 30 añitos?</button>
             <button class="btn" onclick="mostrarSeccion(3)">🍴 ¿Qué se le antoja a la más preciosa del mundo
                 mundial?</button>
         </div>
 
-        <!-- Caja de contenido dinámico -->
+        <!-- Caja de contenido dinámico (Oculta al cargar) -->
         <div class="message-box" id="cajaDinamica">
-            <p id="textoDinamico">Selecciona una opción arriba...</p>
+            <p id="textoDinamico"></p>
         </div>
 
         <!-- Apartado para subir foto extra opcional -->
@@ -279,7 +279,7 @@
                 texto: "<strong>¿No quieres darme un beso?</strong><br>La neta la neta sí, y lo quiero hacer por el resto de tus cumpleaños."
             },
             2: {
-                texto: "<strong>¿Quién va a cumplir 30 añitos?</strong><br>La más preciosa del mundo mundial",
+                texto: "<strong>¿Quién va a cumplir 30 añitos?</strong><br>La más preciosa del mundo mundial:",
                 htmlExtra: `<img src="nydia.jpeg" class="preset-photo" alt="Nydia">`
             },
             3: {
@@ -327,9 +327,7 @@
             document.getElementById('vibeSeleccionadoText').innerText = `🌍 Vibe elegida: ${banderaElegida}`;
             detalle.style.display = detalle.style.display === 'block' ? 'none' : 'block';
         }
-
-        // Mostrar opción 1 por defecto al cargar
-        mostrarSeccion(1);
+        // Sin llamada inicial automática para que arranque vacío/oculto
     </script>
 </body>
 
