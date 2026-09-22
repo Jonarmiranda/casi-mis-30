@@ -38,7 +38,7 @@
             border-radius: 20px;
             padding: 40px 30px;
             width: 100%;
-            max-width: 550px;
+            max-width: 580px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(138, 154, 134, 0.2);
             border: 2px solid white;
@@ -53,7 +53,7 @@
 
         p.subtitle {
             font-size: 1.1rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             color: #60745e;
         }
 
@@ -61,7 +61,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .btn {
@@ -84,24 +84,62 @@
         }
 
         .message-box {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
             border-radius: 12px;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
             margin-bottom: 25px;
             color: #556b53;
             border: 1px dashed var(--olivo-suave);
+            text-align: left;
+            display: none;
         }
 
-        /* Sección de subir foto */
+        .message-box.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .preset-photo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sección de banderas */
+        .flags-section {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .flag-btn {
+            background: white;
+            border: 2px solid var(--olivo-suave);
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .flag-btn:hover,
+        .flag-btn.selected {
+            background: var(--olivo-suave);
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(138, 154, 134, 0.4);
+        }
+
+        /* Apartado para subir/cargar foto propia extra si lo desea */
         .photo-section {
             margin-bottom: 25px;
             padding-top: 20px;
             border-top: 1px solid rgba(138, 154, 134, 0.3);
+            text-align: center;
         }
 
         .photo-section h3 {
@@ -133,7 +171,7 @@
         .photo-preview {
             margin-top: 15px;
             width: 100%;
-            max-height: 220px;
+            max-height: 200px;
             object-fit: cover;
             border-radius: 12px;
             display: none;
@@ -160,21 +198,22 @@
             opacity: 0.95;
         }
 
-        /* Pantalla de sorpresa ocultable/desplegable */
         .invitation-details {
             display: none;
             margin-top: 25px;
             background: white;
-            padding: 20px;
+            padding: 22px;
             border-radius: 15px;
             border: 2px solid var(--rosa-pastel);
             animation: fadeIn 0.5s ease-in-out;
+            text-align: left;
         }
 
         .invitation-details h2 {
             color: var(--olivo-suave);
             margin-bottom: 10px;
             font-size: 1.5rem;
+            text-align: center;
         }
 
         @keyframes fadeIn {
@@ -195,48 +234,79 @@
 
     <div class="container">
         <h1>Casi mis 30 ✨</h1>
-        <p class="subtitle">Un recorrido antes del gran número...</p>
-
-        <div class="message-box" id="mensajeDisplay">
-            Presiona un botón para leer algo bonito... 💕
-        </div>
+        <p class="subtitle">Mi semana cumpleañera...</p>
 
         <div class="btn-group">
-            <button class="btn" onclick="mostrarFrase(1)">💌 ¿Por qué te adoro?</button>
-            <button class="btn" onclick="mostrarFrase(2)">🌸 Tu sonrisa hoy</button>
-            <button class="btn" onclick="mostrarFrase(3)">🥂 Por los 30 que vienen</button>
+            <button class="btn" onclick="mostrarSeccion(1)">💌 ¿No quieres darme un beso?</button>
+            <button class="btn" onclick="mostrarSeccion(2)">🌸 ¿Quién va a cumpliar 30 añitos?</button>
+            <button class="btn" onclick="mostrarSeccion(3)">🍴 ¿Qué se le antoja a la más preciosa del mundo
+                mundial?</button>
         </div>
 
-        <!-- Apartado para subir/cargar foto -->
+        <!-- Caja de contenido dinámico -->
+        <div class="message-box" id="cajaDinamica">
+            <p id="textoDinamico">Selecciona una opción arriba...</p>
+        </div>
+
+        <!-- Apartado para subir foto extra opcional -->
         <div class="photo-section">
-            <h3>Sube una fotito especial de ustedes 📸</h3>
+            <h3>¿Quieres subir otra fotito extra? 📸</h3>
             <label for="subirFoto" class="file-upload-label">📁 Elegir fotito</label>
             <input type="file" id="subirFoto" accept="image/*" onchange="verFoto(event)">
-            <img id="vistaPrevia" class="photo-preview" alt="Recuerdo">
+            <img id="vistaPrevia" class="photo-preview" alt="Recuerdo subido">
         </div>
 
         <!-- Botón para la invitación final -->
         <button class="btn-final" onclick="revelarCena()">🍽️ Ver invitación a la cena</button>
 
         <div class="invitation-details" id="detalleCena">
-            <h2>¡Estás invitada! </h2>
+            <h2>¡Estás invitada! 💕</h2>
             <p><strong>Cena especial de Cumpleaños</strong></p>
             <p>📅 <strong>Sábado 26 de septiembre</strong></p>
             <p>⏰ <strong>8:00 PM</strong></p>
-            <p style="margin-top: 15px; font-size: 0.95rem; color: #60745e;">¡Prepárate para consentirte como te
-                mereces! ❤️</p>
+            <p id="vibeSeleccionadoText" style="margin-top: 10px; font-weight: 600; color: var(--olivo-suave);">🌍 Vibe
+                elegida: 🇲🇽 México</p>
+            <p style="margin-top: 15px; font-size: 0.95rem; color: #60745e; text-align: center;">¡Prepárate para
+                consentirte como te mereces! ❤️</p>
         </div>
     </div>
 
     <script>
-        const frases = {
-            1: "Cada risa contigo hace que la vida tenga el color más bonito.",
-            2: "Brillas más que cualquier estrella, y me encanta caminar a tu lado.",
-            3: "Los 30 te quedan perfectos, pero mi parte favorita es seguir sumando años contigo."
+        let banderaElegida = '🇲🇽 México';
+
+        const contenidoBoton = {
+            1: {
+                texto: "<strong>¿No quieres darme un beso?</strong><br>La neta la neta sí, y lo quiero hacer por el resto de tus cumpleaños."
+            },
+            2: {
+                texto: "<strong>¿Quién va a cumplir 30 añitos?</strong><br>La más preciosa del mundo mundial",
+                htmlExtra: `<img src="nydia.jpeg" class="preset-photo" alt="Nydia">`
+            },
+            3: {
+                texto: "<strong>¿Qué se le antoja a la bella cumpleañera?</strong>",
+                htmlExtra: `
+                    <div class="flags-section">
+                        <button class="flag-btn" onclick="seleccionarBandera('🇧🇷 Brasil', this)">🇧🇷</button>
+                        <button class="flag-btn" onclick="seleccionarBandera('🇪🇸 España', this)">🇪🇸</button>
+                        <button class="flag-btn" onclick="seleccionarBandera('🇫🇷 Francia', this)">🇫🇷</button>
+                        <button class="flag-btn selected" onclick="seleccionarBandera('🇲🇽 México', this)">🇲🇽</button>
+                    </div>
+                `
+            }
         };
 
-        function mostrarFrase(opcion) {
-            document.getElementById('mensajeDisplay').innerText = frases[opcion];
+        function mostrarSeccion(opcion) {
+            const caja = document.getElementById('cajaDinamica');
+            const data = contenidoBoton[opcion];
+            caja.innerHTML = `<p>${data.texto}</p>` + (data.htmlExtra || '');
+            caja.classList.add('active');
+        }
+
+        function seleccionarBandera(nombreBandera, elementoBtn) {
+            banderaElegida = nombreBandera;
+            document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('selected'));
+            if (elementoBtn) elementoBtn.classList.add('selected');
+            document.getElementById('vibeSeleccionadoText').innerText = `🌍 Vibe elegida: ${banderaElegida}`;
         }
 
         function verFoto(event) {
@@ -254,8 +324,12 @@
 
         function revelarCena() {
             const detalle = document.getElementById('detalleCena');
+            document.getElementById('vibeSeleccionadoText').innerText = `🌍 Vibe elegida: ${banderaElegida}`;
             detalle.style.display = detalle.style.display === 'block' ? 'none' : 'block';
         }
+
+        // Mostrar opción 1 por defecto al cargar
+        mostrarSeccion(1);
     </script>
 </body>
 
